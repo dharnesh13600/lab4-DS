@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: image-worker
+  template:
+    metadata:
+      labels:
+        app: image-worker
+    spec:
+      containers:
+      - name: image-worker
+        image: image-worker:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 8001
+        env:
+        - name: REDIS_HOST
+          value: "redis-service"
+        - name: REDIS_PORT
+          value: "6379"

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: image-api
+  template:
+    metadata:
+      labels:
+        app: image-api
+    spec:
+      containers:
+      - name: image-api
+        image: image-api:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 8000
+        env:
+        - name: R_HOST
+          value: "redis-service"
+        - name: R_PORT
+          value: "6379"

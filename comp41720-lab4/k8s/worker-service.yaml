@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: image-worker-service
+spec:
+  selector:
+    app: image-worker
+  ports:
+    - port: 8001
+      targetPort: 8001
